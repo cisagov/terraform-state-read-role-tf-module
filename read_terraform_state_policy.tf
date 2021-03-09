@@ -21,12 +21,13 @@ data "aws_iam_policy_document" "read_terraform_state" {
     actions = [
       "s3:GetObject",
     ]
-    resources = [
-      "arn:aws:s3:::${var.terraform_state_bucket_name}/env:/${var.terraform_workspace}/${var.terraform_state_path}",
+    resources = concat(
       # If the "default" workspace (or "*" for all workspaces) is specified,
       # include the path where Terraform stores default workspace state.
-      contains(["*", "default"], var.terraform_workspace) ? "arn:aws:s3:::${var.terraform_state_bucket_name}/${var.terraform_state_path}" : "",
-    ]
+      contains(["*", "default"], var.terraform_workspace) ? ["arn:aws:s3:::${var.terraform_state_bucket_name}/${var.terraform_state_path}"] : [],
+      # For non-"default" workspaces, include the correct bucket path.
+      var.terraform_workspace != "default" ? ["arn:aws:s3:::${var.terraform_state_bucket_name}/env:/${var.terraform_workspace}/${var.terraform_state_path}"] : [],
+    )
   }
 }
 
