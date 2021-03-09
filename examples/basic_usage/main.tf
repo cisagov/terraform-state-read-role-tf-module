@@ -1,10 +1,14 @@
+# Our primary provider is in the Terraform account
 provider "aws" {
-  # Our primary provider uses our terraform role
-  region = var.aws_region
-  assume_role {
-    role_arn     = var.tf_role_arn
-    session_name = "terraform-example"
-  }
+  profile = "cool-terraform-provisionaccount"
+  region  = "us-east-1"
+}
+
+# Provider for the Users account
+provider "aws" {
+  alias   = "users"
+  profile = "cool-users-provisionaccount"
+  region  = "us-east-1"
 }
 
 #-------------------------------------------------------------------------------
@@ -13,11 +17,12 @@ provider "aws" {
 module "example" {
   source = "../../"
   providers = {
-    aws = aws
+    aws       = aws
+    aws.users = aws.users
   }
 
-  ami_owner_account_id  = var.ami_owner_account_id
-  aws_availability_zone = var.aws_availability_zone
-  aws_region            = var.aws_region
-  subnet_id             = aws_subnet.example.id
+  account_ids                 = var.account_ids
+  role_name                   = "ReadTerraformStateReadRoleTFModuleTerraformState"
+  terraform_state_bucket_name = "cisa-cool-terraform-state"
+  terraform_state_path        = "terraform-state-read-role-tf-module/examples/basic_usage/*.tfstate"
 }
