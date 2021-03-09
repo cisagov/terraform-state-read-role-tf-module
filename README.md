@@ -2,38 +2,31 @@
 
 [![GitHub Build Status](https://github.com/cisagov/terraform-state-read-role-tf-module/workflows/build/badge.svg)](https://github.com/cisagov/terraform-state-read-role-tf-module/actions)
 
-This is a generic skeleton project that can be used to quickly get a
-new [cisagov](https://github.com/cisagov) [Terraform
-module](https://www.terraform.io/docs/modules/index.html) GitHub
-repository started.  This skeleton project contains [licensing
-information](LICENSE), as well as [pre-commit
-hooks](https://pre-commit.com) and
-[GitHub Actions](https://github.com/features/actions) configurations
-appropriate for the major languages that we use.
-
-See [here](https://www.terraform.io/docs/modules/index.html) for more
-details on Terraform modules and the standard module structure.
+This is a Terraform module for creating an IAM role and policy that can
+read Terraform state objects from a specified S3 bucket.  It also creates
+a policy that allows the role to be assumed from a specified list of AWS
+account IDs.
 
 ## Usage ##
 
 ```hcl
 module "example" {
   source = "github.com/cisagov/terraform-state-read-role-tf-module"
-
-  aws_region            = "us-west-1"
-  aws_availability_zone = "b"
-  subnet_id             = "subnet-0123456789abcdef0"
-
-  tags = {
-    Key1 = "Value1"
-    Key2 = "Value2"
+  providers = {
+    aws       = aws
+    aws.users = aws.users
   }
+
+  account_ids = ["111111111111"]
+  role_name = "ReadTerraformStateReadRoleTFModuleTerraformState"
+  terraform_state_bucket_name = "cisa-cool-terraform-state"
+  terraform_state_path = "terraform-state-read-role-tf-module/examples/basic_usage/*.tfstate"
 }
 ```
 
 ## Examples ##
 
-* [Deploying into the default VPC](https://github.com/cisagov/terraform-state-read-role-tf-module/tree/develop/examples/default_vpc)
+* [Create an IAM role that can read a Terraform state](https://github.com/cisagov/terraform-state-read-role-tf-module/tree/develop/examples/basic_usage)
 
 ## Requirements ##
 
@@ -47,39 +40,37 @@ module "example" {
 | Name | Version |
 |------|---------|
 | aws | ~> 3.0 |
+| aws.users | ~> 3.0 |
 
 ## Inputs ##
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| ami_owner_account_id | The ID of the AWS account that owns the Example AMI, or "self" if the AMI is owned by the same account as the provisioner. | `string` | `self` | no |
-| aws_availability_zone | The AWS availability zone to deploy into (e.g. a, b, c, etc.) | `string` | `a` | no |
-| aws_region | The AWS region to deploy into (e.g. us-east-1) | `string` | `us-east-1` | no |
-| subnet_id | The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0) | `string` | n/a | yes |
-| tags | Tags to apply to all AWS resources created | `map(string)` | `{}` | no |
+| account_ids | AWS account IDs that are allowed to assume the role that allows read-only access to the specified Terraform state. | `list(string)` | `[]` | no |
+| assume_role_policy_description | The description to associate with the IAM policy that allows assumption of the role that allows read-only access to the specified Terraform state.  Note that the first "%s" in this value will get replaced with the role_name variable and the second "%s" will get replaced with the terraform_account_name variable. | `string` | `Allow assumption of the %s role in the %s account.` | no |
+| assume_role_policy_name | The name to assign the IAM policy that allows assumption of the role that allows read-only access to the specified Terraform state.  Note that the "%s" in this value will get replaced with the role_name variable. | `string` | `Assume%s` | no |
+| iam_usernames | The list of IAM usernames allowed to assume the role that allows read-only access to the specified Terraform state.  If not provided, defaults to allowing any user in the specified account(s).  Note that including "root" in this list will override any other usernames in the list. | `list(string)` | `["root"]` | no |
+| role_description | The description to associate with the IAM role (as well as the corresponding policy) that allows read-only access to the specified state in the specified S3 bucket where Terraform state is stored.  Note that the first "%s" in this value will get replaced with the terraform_workspace variable, the second "%s" will get replaced with the terraform_state_path variable, and the third "%s" will get replaced with the terraform_state_bucket_name variable. | `string` | `Allows read-only access to the Terraform workspace(s) and state at /env:/%s/%s in the %s S3 bucket.` | no |
+| role_name | The name to assign the IAM role (as well as the corresponding policy) that allows read-only access to the specified state in the S3 bucket where Terraform state is stored. | `string` | n/a | yes |
+| role_tags | Tags to apply to the IAM role created. | `map(string)` | `{}` | no |
+| terraform_account_name | The name of the account containing the S3 bucket where Terraform state is stored. | `string` | `Terraform` | no |
+| terraform_state_bucket_name | The name of the S3 bucket where Terraform state is stored (e.g. example-terraform-state-bucket). | `string` | n/a | yes |
+| terraform_state_path | The path to the Terraform state key(s) in the S3 bucket that the role will be allowed to read (e.g. example-terraform-project/*). | `string` | n/a | yes |
+| terraform_workspace | The name of the workspace containing the Terraform state that the role will be allowed to read.  Defaults to all workspaces ('*'). | `string` | `*` | no |
 
 ## Outputs ##
 
 | Name | Description |
 |------|-------------|
-| arn | The EC2 instance ARN |
-| availability_zone | The AZ where the EC2 instance is deployed |
-| id | The EC2 instance ID |
-| private_ip | The private IP of the EC2 instance |
-| subnet_id | The ID of the subnet where the EC2 instance is deployed |
+| assume_policy | The policy allowing assumption of the role that can read the specified Terraform state. |
+| policy | The policy that can read the specified Terraform state. |
+| role | The role that can read the specified Terraform state. |
 
 ## Notes ##
 
 Running `pre-commit` requires running `terraform init` in every directory that
 contains Terraform code. In this repository, these are the main directory and
 every directory under `examples/`.
-
-## New Repositories from a Skeleton ##
-
-Please see our [Project Setup guide](https://github.com/cisagov/development-guide/tree/develop/project_setup)
-for step-by-step instructions on how to start a new repository from
-a skeleton. This will save you time and effort when configuring a
-new repository!
 
 ## Contributing ##
 
