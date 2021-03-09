@@ -18,9 +18,9 @@ locals {
   iam_usernames = contains(var.iam_usernames, "root") ? ["root"] : formatlist("user/%s", var.iam_usernames)
 
   # If var.role_description contains three instances of "%s", use format() to
-  # replace the first "%s" with var.terraform_workspace, the second "%s" with
-  # var.terraform_state_path, and the third "%s" with
+  # replace the first "%s" with var.terraform_state_path, the second "%s"
+  # with var.terraform_workspace, and the third "%s" with
   # var.terraform_state_bucket_name.  Otherwise just use var.role_description
   # as is.
-  role_description = length(regexall(".*%s.*%s.*%s.*", var.role_description)) > 0 ? format(var.role_description, var.terraform_workspace, var.terraform_state_path, var.terraform_state_bucket_name) : var.role_description
+  role_description = length(regexall(".*%s.*%s.*%s.*", var.role_description)) > 0 ? format(var.role_description, var.terraform_state_path, var.terraform_workspace, var.terraform_state_bucket_name) : var.role_description
 }

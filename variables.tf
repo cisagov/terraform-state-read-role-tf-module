@@ -51,8 +51,8 @@ variable "iam_usernames" {
 
 variable "role_description" {
   type        = string
-  description = "The description to associate with the IAM role (as well as the corresponding policy) that allows read-only access to the specified state in the specified S3 bucket where Terraform state is stored.  Note that the first \"%s\" in this value will get replaced with the terraform_workspace variable, the second \"%s\" will get replaced with the terraform_state_path variable, and the third \"%s\" will get replaced with the terraform_state_bucket_name variable."
-  default     = "Allows read-only access to the Terraform workspace(s) and state at /env:/%s/%s in the %s S3 bucket."
+  description = "The description to associate with the IAM role (as well as the corresponding policy) that allows read-only access to the specified state in the specified S3 bucket where Terraform state is stored.  Note that the first \"%s\" in this value will get replaced with the terraform_state_path variable, the second \"%s\" will get replaced with the terraform_workspace variable, and the third \"%s\" will get replaced with the terraform_state_bucket_name variable."
+  default     = "Allows read-only access to the Terraform state at '%s' for the '%s' workspace(s) in the %s S3 bucket."
 }
 
 variable "role_tags" {
