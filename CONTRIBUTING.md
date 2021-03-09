@@ -14,9 +14,9 @@ all of which should be in this repository.
 ## Issues ##
 
 If you want to report a bug or request a new feature, the most direct
-method is to [create an
-issue](https://github.com/cisagov/terraform-state-read-role-tf-module/issues) in this
-repository.  We recommend that you first search through existing
+method is to
+[create an issue](https://github.com/cisagov/terraform-state-read-role-tf-module/issues)
+in this repository.  We recommend that you first search through existing
 issues (both open and closed) to check if your particular issue has
 already been reported.  If it has then you might want to add a comment
 to the existing issue.  If it hasn't then feel free to create a new
