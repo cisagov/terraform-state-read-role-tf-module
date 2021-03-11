@@ -4,11 +4,11 @@ output "assume_policy" {
 }
 
 output "policy" {
-  value       = aws_iam_policy.read_terraform_state
+  value       = module.read_terraform_state.policy
   description = "The policy that can read the specified Terraform state."
 }
 
 output "role" {
-  value       = aws_iam_role.read_terraform_state
+  value       = module.read_terraform_state.role
   description = "The role that can read the specified Terraform state."
 }

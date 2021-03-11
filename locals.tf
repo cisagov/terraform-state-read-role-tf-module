@@ -14,8 +14,6 @@ locals {
   # var.assume_role_policy_name as is.
   assume_role_policy_name = length(regexall(".*%s.*", var.assume_role_policy_name)) > 0 ? format(var.assume_role_policy_name, var.role_name) : var.assume_role_policy_name
 
-  # Properly format usernames for use in an ARN
-  iam_usernames = contains(var.iam_usernames, "root") ? ["root"] : formatlist("user/%s", var.iam_usernames)
   # Create a list of paths in the S3 bucket that our role is allowed to read.
   bucket_paths_allowed_to_read = concat(
     # If the "default" workspace (or "*" for all workspaces) is specified,

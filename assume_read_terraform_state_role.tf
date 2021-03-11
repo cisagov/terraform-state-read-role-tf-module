@@ -7,7 +7,7 @@ data "aws_iam_policy_document" "assume_read_terraform_state_doc" {
     actions = ["sts:AssumeRole"]
 
     resources = [
-      aws_iam_role.read_terraform_state.arn,
+      module.read_terraform_state.role.arn,
     ]
   }
 }
