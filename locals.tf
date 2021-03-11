@@ -16,6 +16,14 @@ locals {
 
   # Properly format usernames for use in an ARN
   iam_usernames = contains(var.iam_usernames, "root") ? ["root"] : formatlist("user/%s", var.iam_usernames)
+  # Create a list of paths in the S3 bucket that our role is allowed to read.
+  bucket_paths_allowed_to_read = concat(
+    # If the "default" workspace (or "*" for all workspaces) is specified,
+    # include the path where Terraform stores default workspace state.
+    contains(["*", "default"], var.terraform_workspace) ? ["${var.terraform_state_path}"] : [],
+    # For non-"default" workspaces, include the correct bucket path.
+    var.terraform_workspace != "default" ? ["env:/${var.terraform_workspace}/${var.terraform_state_path}"] : [],
+  )
 
   # If var.role_description contains three instances of "%s", use format() to
   # replace the first "%s" with var.terraform_state_path, the second "%s"
