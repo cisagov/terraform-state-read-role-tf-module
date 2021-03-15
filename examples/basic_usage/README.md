@@ -1,16 +1,29 @@
-# Launch an example EC2 instance in a new VPC #
+# Create an IAM role that can read a Terraform state #
 
 ## Usage ##
 
-To run this example you need to execute the `terraform init` command
-followed by the `terraform apply` command.
+To run this example, do the following:
+
+- Execute the `terraform init` command to initialize Terraform.
+- Create a Terraform variables file (e.g. `example.tfvars`) containing
+  the account ID(s) that are allowed to assume the Terraform role that will
+  be created:
+
+  ```hcl
+  account_ids = ["111111111111"]
+  ```
+
+- Execute the `terraform apply` command to create the IAM role and policies.
 
 Note that this example may create resources which cost money. Run
 `terraform destroy` when you no longer need these resources.
 
 ## Requirements ##
 
-No requirements.
+- The default `aws` provider must have permission to create the specified
+  IAM policy and role.
+- The `aws.users` provider must have permission to create the specified
+  IAM policy.
 
 ## Providers ##
 
@@ -22,17 +35,12 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| ami_owner_account_id | The ID of the AWS account that owns the AMI, or "self" if the AMI is owned by the same account as the provisioner. | `string` | `self` | no |
-| aws_availability_zone | The AWS availability zone to deploy into (e.g. a, b, c, etc.) | `string` | `a` | no |
-| aws_region | The AWS region to deploy into (e.g. us-east-1). | `string` | `us-east-1` | no |
-| tf_role_arn | The ARN of the role that can terraform non-specialized resources. | `string` | n/a | yes |
+| account_ids | AWS account IDs that are allowed to assume the role that allows read-only access to the Terraform state for this example. | `list(string)` | n/a | yes |
 
 ## Outputs ##
 
 | Name | Description |
 |------|-------------|
-| arn | The EC2 instance ARN |
-| availability_zone | The AZ where the EC2 instance is deployed |
-| id | The EC2 instance ID |
-| private_ip | The private IP of the EC2 instance |
-| subnet_id | The ID of the subnet where the EC2 instance is deployed |
+| assume_policy | The policy allowing assumption of the role that can read the  Terraform state for this example. |
+| policy | The policy that can read the Terraform state for this example. |
+| role | The role that can read the Terraform state for this example. |
