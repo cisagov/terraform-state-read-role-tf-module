@@ -9,7 +9,7 @@ To run this example, do the following:
   the account ID(s) that are allowed to assume the Terraform role that will
   be created:
 
-  ```console
+  ```hcl
   account_ids = ["111111111111"]
   ```
 
