@@ -49,6 +49,6 @@ No resources.
 
 | Name | Description |
 |------|-------------|
-| assume\_policy | The policy allowing assumption of the role that can read the  Terraform state for this example. |
+| assume\_policy | The policy allowing assumption of the role that can read the Terraform state for this example. |
 | policy | The policy that can read the Terraform state for this example. |
 | role | The role that can read the Terraform state for this example. |
