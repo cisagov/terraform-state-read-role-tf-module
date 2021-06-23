@@ -1,12 +1,22 @@
 # Our primary provider is in the Terraform account
 provider "aws" {
+  default_tags {
+    tags = {
+      Testing = true
+    }
+  }
   profile = "cool-terraform-provisionaccount"
   region  = "us-east-1"
 }
 
 # Provider for the Users account
 provider "aws" {
-  alias   = "users"
+  alias = "users"
+  default_tags {
+    tags = {
+      Testing = true
+    }
+  }
   profile = "cool-users-provisionaccount"
   region  = "us-east-1"
 }

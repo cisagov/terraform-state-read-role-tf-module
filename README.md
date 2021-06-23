@@ -33,14 +33,27 @@ module "example" {
 | Name | Version |
 |------|---------|
 | terraform | ~> 0.12.0 |
-| aws | ~> 3.0 |
+| aws | ~> 3.38 |
 
 ## Providers ##
 
 | Name | Version |
 |------|---------|
-| aws | ~> 3.0 |
-| aws.users | ~> 3.0 |
+| aws | ~> 3.38 |
+| aws.users | ~> 3.38 |
+
+## Modules ##
+
+| Name | Source | Version |
+|------|--------|---------|
+| read\_terraform\_state | github.com/cisagov/s3-read-role-tf-module |  |
+
+## Resources ##
+
+| Name | Type |
+|------|------|
+| [aws_iam_policy.assume_read_terraform_state_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
+| [aws_iam_policy_document.assume_read_terraform_state_doc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
 ## Modules ##
 
