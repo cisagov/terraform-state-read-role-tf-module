@@ -55,19 +55,6 @@ module "example" {
 | [aws_iam_policy.assume_read_terraform_state_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_policy_document.assume_read_terraform_state_doc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
-## Modules ##
-
-| Name | Source | Version |
-|------|--------|---------|
-| read\_terraform\_state | github.com/cisagov/s3-read-role-tf-module |  |
-
-## Resources ##
-
-| Name | Type |
-|------|------|
-| [aws_iam_policy.assume_read_terraform_state_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
-| [aws_iam_policy_document.assume_read_terraform_state_doc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
-
 ## Inputs ##
 
 | Name | Description | Type | Default | Required |
