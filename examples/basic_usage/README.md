@@ -27,20 +27,28 @@ Note that this example may create resources which cost money. Run
 
 ## Providers ##
 
-| Name | Version |
-|------|---------|
-| aws | n/a |
+No providers.
+
+## Modules ##
+
+| Name | Source | Version |
+|------|--------|---------|
+| example | ../../ |  |
+
+## Resources ##
+
+No resources.
 
 ## Inputs ##
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| account_ids | AWS account IDs that are allowed to assume the role that allows read-only access to the Terraform state for this example. | `list(string)` | n/a | yes |
+| account\_ids | AWS account IDs that are allowed to assume the role that allows read-only access to the Terraform state for this example. | `list(string)` | n/a | yes |
 
 ## Outputs ##
 
 | Name | Description |
 |------|-------------|
-| assume_policy | The policy allowing assumption of the role that can read the  Terraform state for this example. |
+| assume\_policy | The policy allowing assumption of the role that can read the Terraform state for this example. |
 | policy | The policy that can read the Terraform state for this example. |
 | role | The role that can read the Terraform state for this example. |

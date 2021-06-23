@@ -43,12 +43,6 @@ variable "assume_role_policy_name" {
   default     = "Assume%s"
 }
 
-variable "aws_region" {
-  type        = string
-  description = "The AWS region where the non-global resources are to be provisioned (e.g. \"us-east-1\")."
-  default     = "us-east-1"
-}
-
 variable "iam_usernames" {
   type        = list(string)
   description = "The list of IAM usernames allowed to assume the role that allows read-only access to the specified Terraform state.  If not provided, defaults to allowing any user in the specified account(s).  Note that including \"root\" in this list will override any other usernames in the list."
