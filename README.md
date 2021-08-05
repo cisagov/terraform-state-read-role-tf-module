@@ -26,7 +26,7 @@ module "example" {
 
 ## Examples ##
 
-* [Create an IAM role that can read a Terraform state](https://github.com/cisagov/terraform-state-read-role-tf-module/tree/develop/examples/basic_usage)
+- [Create an IAM role that can read a Terraform state](https://github.com/cisagov/terraform-state-read-role-tf-module/tree/develop/examples/basic_usage)
 
 ## Requirements ##
 
