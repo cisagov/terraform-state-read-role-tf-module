@@ -39,14 +39,20 @@ variable "additional_role_tags" {
 
 variable "assume_role_policy_description" {
   type        = string
-  description = "The description to associate with the IAM policy that allows assumption of the role that allows read-only access to the specified Terraform state.  Note that the first \"%s\" in this value will get replaced with the role_name variable and the second \"%s\" will get replaced with the terraform_account_name variable."
+  description = "The description to associate with the IAM policy that allows assumption of the role that allows read-only access to the specified Terraform state.  Note that the first \"%s\" in this value will get replaced with the role_name variable and the second \"%s\" will get replaced with the terraform_account_name variable.  Not used if create_assume_role is false."
   default     = "Allow assumption of the %s role in the %s account."
 }
 
 variable "assume_role_policy_name" {
   type        = string
-  description = "The name to assign the IAM policy that allows assumption of the role that allows read-only access to the specified Terraform state.  Note that the \"%s\" in this value will get replaced with the role_name variable."
+  description = "The name to assign the IAM policy that allows assumption of the role that allows read-only access to the specified Terraform state.  Note that the \"%s\" in this value will get replaced with the role_name variable.  Not used if create_assume_role is false."
   default     = "Assume%s"
+}
+
+variable "create_assume_role" {
+  type        = bool
+  description = "A boolean value indicating whether or not to create the assume role policy.  In some cases users may want to handle the role delegation in a different way."
+  default     = true
 }
 
 variable "iam_usernames" {

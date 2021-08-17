@@ -13,6 +13,7 @@ data "aws_iam_policy_document" "assume_read_terraform_state_doc" {
 }
 
 resource "aws_iam_policy" "assume_read_terraform_state_role" {
+  count    = var.create_assume_role ? 1 : 0
   provider = aws.users
 
   description = local.assume_role_policy_description
