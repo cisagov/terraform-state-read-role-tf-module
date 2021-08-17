@@ -1,6 +1,6 @@
 output "assume_policy" {
   value       = aws_iam_policy.assume_read_terraform_state_role
-  description = "The policy allowing assumption of the role that can read the specified Terraform state."
+  description = "An array that is either empty (if no assume role policy was created) or contains a single element that is the policy allowing assumption of the role that can read the specified Terraform state."
 }
 
 output "policy" {
