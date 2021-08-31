@@ -15,25 +15,31 @@ To run this example, do the following:
 
 - Execute the `terraform apply` command to create the IAM role and policies.
 
-Note that this example may create resources which cost money. Run
-`terraform destroy` when you no longer need these resources.
-
-## Requirements ##
-
+Notes:
+- This example may create resources which cost money. Run
+  `terraform destroy` when you no longer need these resources.
 - The default `aws` provider must have permission to create the specified
   IAM policy and role.
 - The `aws.users` provider must have permission to create the specified
   IAM policy.
 
+## Requirements ##
+
+| Name | Version |
+|------|---------|
+| terraform | ~> 0.13.0 |
+
 ## Providers ##
 
-No providers.
+| Name | Version |
+|------|---------|
+| aws | ~> 3.38 |
 
 ## Modules ##
 
 | Name | Source | Version |
 |------|--------|---------|
-| example | ../../ |  |
+| example | ../../ | n/a |
 
 ## Resources ##
 
