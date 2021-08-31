@@ -16,6 +16,7 @@ To run this example, do the following:
 - Execute the `terraform apply` command to create the IAM role and policies.
 
 Notes:
+
 - This example may create resources which cost money. Run
   `terraform destroy` when you no longer need these resources.
 - The default `aws` provider must have permission to create the specified
