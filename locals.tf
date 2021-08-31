@@ -18,7 +18,7 @@ locals {
   bucket_paths_allowed_to_read = concat(
     # If the "default" workspace (or "*" for all workspaces) is specified,
     # include the path where Terraform stores default workspace state.
-    contains(["*", "default"], var.terraform_workspace) ? ["${var.terraform_state_path}"] : [],
+    contains(["*", "default"], var.terraform_workspace) ? [var.terraform_state_path] : [],
     # For non-"default" workspaces, include the correct bucket path.
     var.terraform_workspace != "default" ? ["env:/${var.terraform_workspace}/${var.terraform_state_path}"] : [],
   )
