@@ -32,7 +32,7 @@ module "example" {
 
 | Name | Version |
 |------|---------|
-| terraform | ~> 0.14.0 |
+| terraform | ~> 1.0 |
 | aws | ~> 3.38 |
 
 ## Providers ##
@@ -46,7 +46,7 @@ module "example" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| read\_terraform\_state | github.com/cisagov/s3-read-role-tf-module |  |
+| read\_terraform\_state | github.com/cisagov/s3-read-role-tf-module | n/a |
 
 ## Resources ##
 
@@ -64,7 +64,7 @@ module "example" {
 | assume\_role\_policy\_description | The description to associate with the IAM policy that allows assumption of the role that allows read-only access to the specified Terraform state.  Note that the first "%s" in this value will get replaced with the role\_name variable and the second "%s" will get replaced with the terraform\_account\_name variable.  Not used if create\_assume\_role is false. | `string` | `"Allow assumption of the %s role in the %s account."` | no |
 | assume\_role\_policy\_name | The name to assign the IAM policy that allows assumption of the role that allows read-only access to the specified Terraform state.  Note that the "%s" in this value will get replaced with the role\_name variable.  Not used if create\_assume\_role is false. | `string` | `"Assume%s"` | no |
 | create\_assume\_role | A boolean value indicating whether or not to create the assume role policy.  In some cases users may want to handle the role delegation in a different way. | `bool` | `true` | no |
-| iam\_usernames | The list of IAM usernames allowed to assume the role that allows read-only access to the specified Terraform state.  If not provided, defaults to allowing any user in the specified account(s).  Note that including "root" in this list will override any other usernames in the list. | `list(string)` | `["root"]` | no |
+| iam\_usernames | The list of IAM usernames allowed to assume the role that allows read-only access to the specified Terraform state.  If not provided, defaults to allowing any user in the specified account(s).  Note that including "root" in this list will override any other usernames in the list. | `list(string)` | ```[ "root" ]``` | no |
 | role\_description | The description to associate with the IAM role (as well as the corresponding policy) that allows read-only access to the specified state in the specified S3 bucket where Terraform state is stored.  Note that the first "%s" in this value will get replaced with the terraform\_state\_path variable, the second "%s" will get replaced with the terraform\_workspace variable, and the third "%s" will get replaced with the terraform\_state\_bucket\_name variable. | `string` | `"Allows read-only access to the Terraform state at '%s' for the '%s' workspace(s) in the %s S3 bucket."` | no |
 | role\_name | The name to assign the IAM role (as well as the corresponding policy) that allows read-only access to the specified state in the S3 bucket where Terraform state is stored. | `string` | n/a | yes |
 | terraform\_account\_name | The name of the account containing the S3 bucket where Terraform state is stored. | `string` | `"Terraform"` | no |
