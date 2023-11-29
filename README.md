@@ -28,19 +28,20 @@ module "example" {
 
 - [Basic usage](https://github.com/cisagov/terraform-state-read-role-tf-module/tree/develop/examples/basic_usage)
 
+<!-- BEGIN_TF_DOCS -->
 ## Requirements ##
 
 | Name | Version |
 |------|---------|
 | terraform | ~> 1.0 |
-| aws | ~> 3.38 |
+| aws | ~> 4.9 |
 
 ## Providers ##
 
 | Name | Version |
 |------|---------|
-| aws | ~> 3.38 |
-| aws.users | ~> 3.38 |
+| aws | ~> 4.9 |
+| aws.users | ~> 4.9 |
 
 ## Modules ##
 
@@ -79,6 +80,7 @@ module "example" {
 | assume\_policy | An array that is either empty (if no assume role policy was created) or contains a single element that is the policy allowing assumption of the role that can read the specified Terraform state. |
 | policy | The policy that can read the specified Terraform state. |
 | role | The role that can read the specified Terraform state. |
+<!-- END_TF_DOCS -->
 
 ## Notes ##
 
