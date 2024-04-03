@@ -47,7 +47,7 @@ module "example" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| read\_terraform\_state | github.com/cisagov/s3-read-role-tf-module | n/a |
+| read\_terraform\_state | github.com/cisagov/s3-read-role-tf-module | testing%2Fterraform-aws-provider_v5 |
 
 ## Resources ##
 
