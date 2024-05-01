@@ -24,6 +24,7 @@ Notes:
 - The `aws.users` provider must have permission to create the specified
   IAM policy.
 
+<!-- BEGIN_TF_DOCS -->
 ## Requirements ##
 
 | Name | Version |
@@ -58,3 +59,4 @@ No resources.
 | assume\_policy | The policy allowing assumption of the role that can read the Terraform state for this example. |
 | policy | The policy that can read the Terraform state for this example. |
 | role | The role that can read the Terraform state for this example. |
+<!-- END_TF_DOCS -->
