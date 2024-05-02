@@ -5,8 +5,8 @@
 # ------------------------------------------------------------------------------
 
 variable "account_ids" {
-  type        = list(string)
   description = "AWS account IDs that are allowed to assume the role that allows read-only access to the Terraform state for this example."
+  type        = list(string)
 }
 
 # ------------------------------------------------------------------------------
