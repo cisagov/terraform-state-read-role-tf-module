@@ -23,10 +23,12 @@ locals {
     var.terraform_workspace != "default" ? ["env:/${var.terraform_workspace}/${var.terraform_state_path}"] : [],
   )
 
-  # If var.role_description contains three instances of "%s", use format() to
-  # replace the first "%s" with var.terraform_state_path, the second "%s"
-  # with var.terraform_workspace, and the third "%s" with
-  # var.terraform_state_bucket_name.  Otherwise just use var.role_description
-  # as is.
-  role_description = length(regexall(".*%s.*%s.*%s.*", var.role_description)) > 0 ? format(var.role_description, var.terraform_state_path, var.terraform_workspace, var.terraform_state_bucket_name) : var.role_description
+  # If var.role_description contains four instances of "%s", use
+  # format() to replace the first "%s" with "read-only" if read_only
+  # is true and "read-write" otherwise, the second "%s" with
+  # var.terraform_state_path, the third "%s" with
+  # var.terraform_workspace, and the fourth "%s" with
+  # var.terraform_state_bucket_name.  Otherwise just use
+  # var.role_description as is.
+  role_description = length(regexall(".*%s.*%s.*%s.*%s.*", var.role_description)) > 0 ? format(var.role_description, var.read_only ? "read-only" : "read-write", var.terraform_state_path, var.terraform_workspace, var.terraform_state_bucket_name) : var.role_description
 }
