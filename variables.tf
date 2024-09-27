@@ -68,8 +68,8 @@ variable "read_only" {
 }
 
 variable "role_description" {
-  default     = "Allows access to the Terraform state at '%s' for the '%s' workspace(s) in the %s S3 bucket."
-  description = "The description to associate with the IAM role (as well as the corresponding policy) that allows access to the specified state in the specified S3 bucket where Terraform state is stored.  Note that the first \"%s\" in this value will get replaced with the terraform_state_path variable, the second \"%s\" will get replaced with the terraform_workspace variable, and the third \"%s\" will get replaced with the terraform_state_bucket_name variable."
+  default     = "Allows %s access to the Terraform state at '%s' for the '%s' workspace(s) in the %s S3 bucket."
+  description = "The description to associate with the IAM role (as well as the corresponding policy) that allows access to the specified state in the specified S3 bucket where Terraform state is stored.  Note that the first \"%s\" in this value will get replaced by \"read-only\" if read_only is true and \"read-write\" otherwise, the second \"%s\" will get replaced with the terraform_state_path variable, the third \"%s\" will get replaced with the terraform_workspace variable, and the fourth \"%s\" will get replaced with the terraform_state_bucket_name variable."
   type        = string
 }
 
