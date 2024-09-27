@@ -2,10 +2,10 @@
 
 [![GitHub Build Status](https://github.com/cisagov/terraform-state-read-role-tf-module/workflows/build/badge.svg)](https://github.com/cisagov/terraform-state-read-role-tf-module/actions)
 
-This is a Terraform module for creating an IAM role and policy that can
-read Terraform state objects from a specified S3 bucket.  It also creates
-a policy that allows the role to be assumed from a specified list of AWS
-account IDs.
+This is a Terraform module for creating an IAM role and policy that
+can access Terraform state objects from a specified S3 bucket.  It
+also creates a policy that allows the role to be assumed from a
+specified list of AWS account IDs.
 
 ## Usage ##
 
