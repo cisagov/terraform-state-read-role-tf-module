@@ -61,6 +61,12 @@ variable "iam_usernames" {
   type        = list(string)
 }
 
+variable "read_only" {
+  default     = true
+  description = "A Boolean value indicating whether or not to make the role and policy read-only.  If false then the role and policy will allow write permissions."
+  type        = bool
+}
+
 variable "role_description" {
   default     = "Allows read-only access to the Terraform state at '%s' for the '%s' workspace(s) in the %s S3 bucket."
   description = "The description to associate with the IAM role (as well as the corresponding policy) that allows read-only access to the specified state in the specified S3 bucket where Terraform state is stored.  Note that the first \"%s\" in this value will get replaced with the terraform_state_path variable, the second \"%s\" will get replaced with the terraform_workspace variable, and the third \"%s\" will get replaced with the terraform_state_bucket_name variable."

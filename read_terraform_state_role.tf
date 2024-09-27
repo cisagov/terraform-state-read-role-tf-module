@@ -13,6 +13,7 @@ module "read_terraform_state" {
   additional_role_tags = var.additional_role_tags
   entity_name          = var.role_name
   iam_usernames        = var.iam_usernames
+  read_only            = var.read_only
   role_description     = local.role_description
   role_name            = var.role_name
   s3_bucket            = var.terraform_state_bucket_name
