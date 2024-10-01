@@ -34,20 +34,20 @@ module "example" {
 | Name | Version |
 |------|---------|
 | terraform | ~> 1.0 |
-| aws | ~> 4.9 |
+| aws | >= 4.9 |
 
 ## Providers ##
 
 | Name | Version |
 |------|---------|
-| aws | ~> 4.9 |
-| aws.users | ~> 4.9 |
+| aws | >= 4.9 |
+| aws.users | >= 4.9 |
 
 ## Modules ##
 
 | Name | Source | Version |
 |------|--------|---------|
-| read\_terraform\_state | github.com/cisagov/s3-read-role-tf-module | n/a |
+| read\_terraform\_state | github.com/cisagov/s3-read-role-tf-module | improvement%2Floosen-version-restriction |
 
 ## Resources ##
 

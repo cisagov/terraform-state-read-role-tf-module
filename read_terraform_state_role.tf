@@ -4,7 +4,7 @@
 # ------------------------------------------------------------------------------
 
 module "read_terraform_state" {
-  source = "github.com/cisagov/s3-read-role-tf-module"
+  source = "github.com/cisagov/s3-read-role-tf-module?ref=improvement%2Floosen-version-restriction"
   providers = {
     aws = aws
   }
