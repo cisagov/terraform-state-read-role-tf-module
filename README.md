@@ -47,7 +47,7 @@ module "example" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| read\_terraform\_state | github.com/cisagov/s3-read-role-tf-module | improvement%2Floosen-version-restriction |
+| read\_terraform\_state | github.com/cisagov/s3-read-role-tf-module | n/a |
 
 ## Resources ##
 
