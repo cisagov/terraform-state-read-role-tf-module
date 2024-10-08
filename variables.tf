@@ -61,6 +61,18 @@ variable "iam_usernames" {
   type        = list(string)
 }
 
+variable "lock_db_policy_description" {
+  default     = "Allows access to the Terraform locking database at '%s' for the '%s' workspace(s)."
+  description = "The description to associate with the IAM policy that allows access to the Terraform locking database.  Note that the first \"%s\" will get replaced with the terraform_state_path variable, and the second \"%s\" will get replaced with the terraform_workspace variable.  This variable is only used if var.read_only is false."
+  type        = string
+}
+
+variable "lock_db_policy_name" {
+  default     = ""
+  description = "The name to assign the IAM policy that allows access to the DynamoDB state locking table.  This variable is only used if var.read_only is false."
+  type        = string
+}
+
 variable "read_only" {
   default     = true
   description = "A Boolean value indicating whether or not to make the role and policy read-only.  If false then the role and policy will allow write permissions."

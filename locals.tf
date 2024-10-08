@@ -31,4 +31,11 @@ locals {
   # var.terraform_state_bucket_name.  Otherwise just use
   # var.role_description as is.
   role_description = length(regexall(".*%s.*%s.*%s.*%s.*", var.role_description)) > 0 ? format(var.role_description, var.read_only ? "read-only" : "read-write", var.terraform_state_path, var.terraform_workspace, var.terraform_state_bucket_name) : var.role_description
+
+  # If var.lock_db_policy_description contains two instances of "%s",
+  # use format() to replace the first "%s" with
+  # var.terraform_state_path, and the second "%s" with
+  # var.terraform_workspace.  Otherwise just use
+  # var.lock_db_policy_description as is.
+  lock_db_policy_description = length(regexall(".*%s.*%s.*", var.lock_db_policy_description)) > 0 ? format(var.lock_db_policy_description, var.terraform_state_path, var.terraform_workspace) : var.lock_db_policy_description
 }
