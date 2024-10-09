@@ -23,6 +23,8 @@ module "read_terraform_state" {
 # IAM policy document that allows sufficient access to the state
 # locking table to use that resource in a Terraform backend.
 data "aws_iam_policy_document" "access_terraform_lock_db_doc" {
+  count = var.read_only ? 0 : 1
+
   statement {
     actions = [
       "dynamodb:DeleteItem",
@@ -47,7 +49,7 @@ resource "aws_iam_policy" "access_terraform_lock_db_policy" {
 
   description = local.lock_db_policy_description
   name        = var.lock_db_policy_name
-  policy      = data.aws_iam_policy_document.access_terraform_lock_db_doc.json
+  policy      = data.aws_iam_policy_document.access_terraform_lock_db_doc[0].json
 }
 
 # Attach the IAM policy to the role
