@@ -62,8 +62,8 @@ variable "iam_usernames" {
 }
 
 variable "lock_db_policy_description" {
-  default     = "Allows access to the Terraform locking database at '%s' for the '%s' workspace(s)."
-  description = "The description to associate with the IAM policy that allows access to the Terraform locking database.  Note that the first \"%s\" will get replaced with the terraform_state_path variable, and the second \"%s\" will get replaced with the terraform_workspace variable.  This variable is only used if var.read_only is false."
+  default     = "Allows access to the Terraform locking database for the '%s' workspace(s)."
+  description = "The description to associate with the IAM policy that allows access to the Terraform locking database.  Note that the first (and only) \"%s\" will get replaced with the terraform_workspace variable.  This variable is only used if read_only is false."
   type        = string
 }
 
