@@ -68,8 +68,9 @@ variable "lock_db_policy_description" {
 }
 
 variable "lock_db_policy_name" {
-  default     = ""
-  description = "The name to assign the IAM policy that allows access to the DynamoDB state locking table.  This variable is only used if var.read_only is false."
+  default     = null
+  description = "The name to assign the IAM policy that allows access to the DynamoDB state locking table.  This variable is only used if read_only is false, and in that case it is required."
+  nullable    = true
   type        = string
 }
 
