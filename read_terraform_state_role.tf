@@ -37,7 +37,7 @@ data "aws_iam_policy_document" "access_terraform_lock_db_doc" {
       variable = "dynamodb:LeadingKeys"
     }
     resources = [
-      "arn:aws:dynamodb:us-east-1:210193616405:table/terraform-state-lock",
+      var.lock_db_table_arn,
     ]
   }
 }

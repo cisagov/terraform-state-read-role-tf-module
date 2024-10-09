@@ -74,6 +74,13 @@ variable "lock_db_policy_name" {
   type        = string
 }
 
+variable "lock_db_table_arn" {
+  default     = null
+  description = "The ARN corresponding to the DynamoDB state locking table.  This variable is only used if read_only is false, and in that case it is required."
+  nullable    = true
+  type        = string
+}
+
 variable "read_only" {
   default     = true
   description = "A Boolean value indicating whether or not to make the role and policy read-only.  If false then the role and policy will allow write permissions."

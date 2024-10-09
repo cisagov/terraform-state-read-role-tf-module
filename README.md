@@ -53,7 +53,10 @@ module "example" {
 
 | Name | Type |
 |------|------|
+| [aws_iam_policy.access_terraform_lock_db_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_policy.assume_read_terraform_state_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
+| [aws_iam_role_policy_attachment.access_terraform_lock_db_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_policy_document.access_terraform_lock_db_doc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.assume_read_terraform_state_doc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs ##
@@ -66,6 +69,9 @@ module "example" {
 | assume\_role\_policy\_name | The name to assign the IAM policy that allows assumption of the role that allows access to the specified Terraform state.  Note that the "%s" in this value will get replaced with the role\_name variable.  Not used if create\_assume\_role is false. | `string` | `"Assume%s"` | no |
 | create\_assume\_role | A boolean value indicating whether or not to create the assume role policy.  In some cases users may want to handle the role delegation in a different way. | `bool` | `true` | no |
 | iam\_usernames | The list of IAM usernames allowed to assume the role that allows access to the specified Terraform state.  If not provided, defaults to allowing any user in the specified account(s).  Note that including "root" in this list will override any other usernames in the list. | `list(string)` | ```[ "root" ]``` | no |
+| lock\_db\_policy\_description | The description to associate with the IAM policy that allows access to the Terraform locking database.  Note that the first (and only) "%s" will get replaced with the terraform\_workspace variable.  This variable is only used if read\_only is false. | `string` | `"Allows access to the Terraform locking database for the '%s' workspace(s)."` | no |
+| lock\_db\_policy\_name | The name to assign the IAM policy that allows access to the DynamoDB state locking table.  This variable is only used if read\_only is false, and in that case it is required. | `string` | `null` | no |
+| lock\_db\_table\_arn | The ARN corresponding to the DynamoDB state locking table.  This variable is only used if read\_only is false, and in that case it is required. | `string` | `null` | no |
 | read\_only | A Boolean value indicating whether or not to make the role and policy read-only.  If false then the role and policy will allow write permissions. | `bool` | `true` | no |
 | role\_description | The description to associate with the IAM role (as well as the corresponding policy) that allows access to the specified state in the specified S3 bucket where Terraform state is stored.  Note that the first "%s" in this value will get replaced by "read-only" if read\_only is true and "read-write" otherwise, the second "%s" will get replaced with the terraform\_state\_path variable, the third "%s" will get replaced with the terraform\_workspace variable, and the fourth "%s" will get replaced with the terraform\_state\_bucket\_name variable. | `string` | `"Allows %s access to the Terraform state at '%s' for the '%s' workspace(s) in the %s S3 bucket."` | no |
 | role\_name | The name to assign the IAM role (as well as the corresponding policy) that allows access to the specified state in the S3 bucket where Terraform state is stored. | `string` | n/a | yes |
