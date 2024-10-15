@@ -59,3 +59,30 @@ resource "aws_iam_role_policy_attachment" "access_terraform_lock_db_policy_attac
   policy_arn = aws_iam_policy.access_terraform_lock_db_policy[0].arn
   role       = module.read_terraform_state.role.name
 }
+
+module "read_terraform_state_additional_states" {
+  count = length(local.additional_bucket_paths_allowed_to_read) == 0 ? 0 : 1
+
+  source = "github.com/cisagov/s3-read-role-tf-module"
+  providers = {
+    aws = aws
+  }
+
+  account_ids          = var.account_ids
+  additional_role_tags = var.additional_role_tags
+  entity_name          = var.additional_read_only_states_role_name
+  iam_usernames        = var.iam_usernames
+  read_only            = true
+  role_description     = local.additional_read_only_states_role_description
+  role_name            = var.additional_read_only_states_role_name
+  s3_bucket            = var.terraform_state_bucket_name
+  s3_objects           = local.additional_bucket_paths_allowed_to_read
+}
+
+# Attach the additional state read-only IAM policy to the role
+resource "aws_iam_role_policy_attachment" "read_only_state_policy_attachment" {
+  count = length(local.additional_bucket_paths_allowed_to_read) == 0 ? 0 : 1
+
+  policy_arn = module.read_terraform_state_additional_states[0].policy.arn
+  role       = module.read_terraform_state.role.name
+}

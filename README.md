@@ -48,6 +48,7 @@ module "example" {
 | Name | Source | Version |
 |------|--------|---------|
 | read\_terraform\_state | github.com/cisagov/s3-read-role-tf-module | n/a |
+| read\_terraform\_state\_additional\_states | github.com/cisagov/s3-read-role-tf-module | n/a |
 
 ## Resources ##
 
@@ -56,6 +57,7 @@ module "example" {
 | [aws_iam_policy.access_terraform_lock_db_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_policy.assume_read_terraform_state_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_role_policy_attachment.access_terraform_lock_db_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role_policy_attachment.read_only_state_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_policy_document.access_terraform_lock_db_doc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.assume_read_terraform_state_doc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
@@ -64,6 +66,9 @@ module "example" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | account\_ids | AWS account IDs that are allowed to assume the role that allows access to the specified Terraform state. | `list(string)` | `[]` | no |
+| additional\_read\_only\_states | A map.  The keys are the state paths and the values are objects where only the key "workspace" is supported, and this key is required.  Together the key and value define an additional workspace-specific state to which the user should be granted read-only access.  E.g., {cool-accounts/dynamic.tfstate = {workspace = env6-staging}}. | `map(object({ workspace = string }))` | `{}` | no |
+| additional\_read\_only\_states\_role\_description | The description to associate with the IAM role (as well as the corresponding policy) that allows read-only access to any additional states in the specified S3 bucket where Terraform state is stored.  The "%s" will get replaced with the terraform\_state\_bucket\_name variable.  Note that these additional states (if any) are defined in additional\_read\_only\_states; hence, this variable is not used if additional\_read\_only\_states is an empty map. | `string` | `"Allows read-only access to additional Terraform states in the %s S3 bucket."` | no |
+| additional\_read\_only\_states\_role\_name | The name to assign the IAM role (as well as the corresponding policy) that allows access to any additional, read-only states in the S3 bucket where Terraform state is stored.  Note that these additional states (if any) are defined in additional\_read\_only\_states; hence, this variable is not used if additional\_read\_only\_states is an empty map.  If additional\_read\_only\_states is non-empty then thisd variable is required. | `string` | `null` | no |
 | additional\_role\_tags | Tags to apply to the IAM role that allows access to the specified Terraform state, in addition to the provider's default tags. | `map(string)` | `{}` | no |
 | assume\_role\_policy\_description | The description to associate with the IAM policy that allows assumption of the role that allows access to the specified Terraform state.  Note that the first "%s" in this value will get replaced with the role\_name variable and the second "%s" will get replaced with the terraform\_account\_name variable.  Not used if create\_assume\_role is false. | `string` | `"Allow assumption of the %s role in the %s account."` | no |
 | assume\_role\_policy\_name | The name to assign the IAM policy that allows assumption of the role that allows access to the specified Terraform state.  Note that the "%s" in this value will get replaced with the role\_name variable.  Not used if create\_assume\_role is false. | `string` | `"Assume%s"` | no |

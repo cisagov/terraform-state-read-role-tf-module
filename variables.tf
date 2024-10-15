@@ -35,6 +35,27 @@ variable "account_ids" {
   type        = list(string)
 }
 
+variable "additional_read_only_states" {
+  default     = {}
+  description = "A map.  The keys are the state paths and the values are objects where only the key \"workspace\" is supported, and this key is required.  Together the key and value define an additional workspace-specific state to which the user should be granted read-only access.  E.g., {cool-accounts/dynamic.tfstate = {workspace = env6-staging}}."
+  nullable    = false
+  type        = map(object({ workspace = string }))
+}
+
+variable "additional_read_only_states_role_description" {
+  default     = "Allows read-only access to additional Terraform states in the %s S3 bucket."
+  description = "The description to associate with the IAM role (as well as the corresponding policy) that allows read-only access to any additional states in the specified S3 bucket where Terraform state is stored.  The \"%s\" will get replaced with the terraform_state_bucket_name variable.  Note that these additional states (if any) are defined in additional_read_only_states; hence, this variable is not used if additional_read_only_states is an empty map."
+  nullable    = false
+  type        = string
+}
+
+variable "additional_read_only_states_role_name" {
+  default     = null
+  description = "The name to assign the IAM role (as well as the corresponding policy) that allows access to any additional, read-only states in the S3 bucket where Terraform state is stored.  Note that these additional states (if any) are defined in additional_read_only_states; hence, this variable is not used if additional_read_only_states is an empty map.  If additional_read_only_states is non-empty then thisd variable is required."
+  nullable    = true
+  type        = string
+}
+
 variable "additional_role_tags" {
   default     = {}
   description = "Tags to apply to the IAM role that allows access to the specified Terraform state, in addition to the provider's default tags."
