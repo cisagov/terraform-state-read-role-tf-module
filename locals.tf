@@ -14,8 +14,8 @@ locals {
   # var.assume_role_policy_name as is.
   assume_role_policy_name = length(regexall(".*%s.*", var.assume_role_policy_name)) > 0 ? format(var.assume_role_policy_name, var.role_name) : var.assume_role_policy_name
 
-  # Create a list of paths in the S3 bucket that our role is allowed to read.
-  bucket_paths_allowed_to_read = concat(
+  # Create a list of paths in the S3 bucket that our role is allowed to access.
+  bucket_paths_allowed_to_access = concat(
     # If the "default" workspace (or "*" for all workspaces) is specified,
     # include the path where Terraform stores default workspace state.
     contains(["*", "default"], var.terraform_workspace) ? [var.terraform_state_path] : [],

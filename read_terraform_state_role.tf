@@ -17,7 +17,7 @@ module "read_terraform_state" {
   role_description     = local.role_description
   role_name            = var.role_name
   s3_bucket            = var.terraform_state_bucket_name
-  s3_objects           = local.bucket_paths_allowed_to_read
+  s3_objects           = local.bucket_paths_allowed_to_access
 }
 
 # IAM policy document that allows sufficient access to the state
@@ -33,7 +33,7 @@ data "aws_iam_policy_document" "access_terraform_lock_db_doc" {
     ]
     condition {
       test     = "ForAnyValue:StringEquals"
-      values   = flatten([for path in local.bucket_paths_allowed_to_read : ["${var.terraform_state_bucket_name}/${path}", "${var.terraform_state_bucket_name}/${path}-md5"]])
+      values   = flatten([for path in local.bucket_paths_allowed_to_access : ["${var.terraform_state_bucket_name}/${path}", "${var.terraform_state_bucket_name}/${path}-md5"]])
       variable = "dynamodb:LeadingKeys"
     }
     resources = [
