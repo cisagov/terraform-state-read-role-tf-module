@@ -2,18 +2,45 @@
 
 ## Usage ##
 
-To run this example, do the following:
+To run this example, do the following (the steps below use an example
+environment named "dev"; replace "dev" with the name of your environment):
 
-- Execute the `terraform init` command to initialize Terraform.
-- Create a Terraform variables file (e.g. `example.tfvars`) containing
-  the account ID(s) that are allowed to assume the Terraform role that will
-  be created:
+1. Create a backend configuration file named `dev.tfconfig` containing the name
+of the S3 bucket where "dev" environment Terraform state is stored - this file
+is required to initialize the Terraform backend in each environment:
 
-  ```hcl
-  account_ids = ["111111111111"]
-  ```
+    ```hcl
+    bucket = "my-dev-terraform-state-bucket"
+    ```
 
-- Execute the `terraform apply` command to create the IAM role and policies.
+1. Initialize the Terraform backend for the "dev" environment using your backend
+   configuration file:
+
+    ```console
+    terraform init -upgrade -backend-config=dev.tfconfig
+    ```
+
+    > [!NOTE]
+    > When performing this step for additional environments (i.e. not your first
+    > environment), use the `-reconfigure` flag:
+    >
+    > ```console
+    > terraform init -upgrade -backend-config=other-env.tfconfig -reconfigure
+    > ```
+
+1. Create a Terraform variables file named `dev.tfvars` containing the account
+  ID(s) that are allowed to assume the Terraform role that will be created and
+  the name of the S3 bucket where Terraform state is stored (this should match
+  the same bucket name as in the `dev.tfconfig` you created previously). For
+  example:
+
+    ```hcl
+    account_ids            = ["111111111111"]
+    terraform_state_bucket = "my-dev-terraform-state-bucket"
+    ```
+
+1. Run `terraform apply -var-file=dev.tfvars` to create the IAM role and
+   policies.
 
 Notes:
 
@@ -51,6 +78,7 @@ No resources.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | account\_ids | AWS account IDs that are allowed to assume the role that allows read-only access to the Terraform state for this example. | `list(string)` | n/a | yes |
+| terraform\_state\_bucket | The name of the S3 bucket where Terraform state is stored. | `string` | n/a | yes |
 
 ## Outputs ##
 

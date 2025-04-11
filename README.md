@@ -19,7 +19,7 @@ module "example" {
 
   account_ids = ["111111111111"]
   role_name = "ReadTerraformStateReadRoleTFModuleTerraformState"
-  terraform_state_bucket_name = "cisa-cool-terraform-state"
+  terraform_state_bucket_name = "my-terraform-state-bucket"
   terraform_state_path = "terraform-state-read-role-tf-module/examples/basic_usage/*.tfstate"
 }
 ```
