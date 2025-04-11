@@ -33,6 +33,6 @@ module "example" {
 
   account_ids                 = var.account_ids
   role_name                   = "ReadTerraformStateReadRoleTFModuleTerraformState"
-  terraform_state_bucket_name = "cisa-cool-terraform-state"
+  terraform_state_bucket_name = var.terraform_state_bucket
   terraform_state_path        = "terraform-state-read-role-tf-module/examples/basic_usage/*.tfstate"
 }
