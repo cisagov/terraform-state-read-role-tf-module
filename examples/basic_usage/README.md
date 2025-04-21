@@ -35,8 +35,8 @@ is required to initialize the Terraform backend in each environment:
   example:
 
     ```hcl
-    account_ids            = ["111111111111"]
-    terraform_state_bucket = "my-dev-terraform-state-bucket"
+    account_ids                 = ["111111111111"]
+    terraform_state_bucket_name = "my-dev-terraform-state-bucket"
     ```
 
 1. Run `terraform apply -var-file=dev.tfvars` to create the IAM role and

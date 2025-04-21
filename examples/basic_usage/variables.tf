@@ -9,7 +9,7 @@ variable "account_ids" {
   type        = list(string)
 }
 
-variable "terraform_state_bucket" {
+variable "terraform_state_bucket_name" {
   description = "The name of the S3 bucket where Terraform state is stored."
   nullable    = false
   type        = string
