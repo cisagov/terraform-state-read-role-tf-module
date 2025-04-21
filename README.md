@@ -19,7 +19,7 @@ module "example" {
 
   account_ids = ["111111111111"]
   role_name = "ReadTerraformStateReadRoleTFModuleTerraformState"
-  terraform_state_bucket_name = "cisa-cool-terraform-state"
+  terraform_state_bucket_name = "my-terraform-state-bucket"
   terraform_state_path = "terraform-state-read-role-tf-module/examples/basic_usage/*.tfstate"
 }
 ```
@@ -81,7 +81,7 @@ module "example" {
 | role\_description | The description to associate with the IAM role (as well as the corresponding policy) that allows access to the specified state in the specified S3 bucket where Terraform state is stored.  Note that the first "%s" in this value will get replaced by "read-only" if read\_only is true and "read-write" otherwise, the second "%s" will get replaced with the terraform\_state\_path variable, the third "%s" will get replaced with the terraform\_workspace variable, and the fourth "%s" will get replaced with the terraform\_state\_bucket\_name variable. | `string` | `"Allows %s access to the Terraform state at '%s' for the '%s' workspace(s) in the %s S3 bucket."` | no |
 | role\_name | The name to assign the IAM role (as well as the corresponding policy) that allows access to the specified state in the S3 bucket where Terraform state is stored. | `string` | n/a | yes |
 | terraform\_account\_name | The name of the account containing the S3 bucket where Terraform state is stored. | `string` | `"Terraform"` | no |
-| terraform\_state\_bucket\_name | The name of the S3 bucket where Terraform state is stored (e.g. example-terraform-state-bucket). | `string` | n/a | yes |
+| terraform\_state\_bucket\_name | The name of the S3 bucket where Terraform state is stored (e.g. my-terraform-state-bucket). | `string` | n/a | yes |
 | terraform\_state\_path | The path to the Terraform state key(s) in the S3 bucket that the role will be allowed to access (e.g. example-terraform-project/*). | `string` | n/a | yes |
 | terraform\_workspace | The name of the workspace containing the Terraform state that the role will be allowed to access.  Defaults to all workspaces ('*'). | `string` | `"*"` | no |
 

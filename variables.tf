@@ -11,7 +11,7 @@ variable "role_name" {
 }
 
 variable "terraform_state_bucket_name" {
-  description = "The name of the S3 bucket where Terraform state is stored (e.g. example-terraform-state-bucket)."
+  description = "The name of the S3 bucket where Terraform state is stored (e.g. my-terraform-state-bucket)."
   nullable    = false
   type        = string
 }
