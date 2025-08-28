@@ -11,7 +11,7 @@ specified list of AWS account IDs.
 
 ```hcl
 module "example" {
-  source = "github.com/cisagov/terraform-state-read-role-tf-module"
+  source = "github.com/cisagov/terraform-state-read-role-tf-module?ref=v1.0.0"
   providers = {
     aws       = aws
     aws.users = aws.users
