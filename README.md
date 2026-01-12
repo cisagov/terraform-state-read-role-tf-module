@@ -1,6 +1,8 @@
 # terraform-state-read-role-tf-module #
 
 [![GitHub Build Status](https://github.com/cisagov/terraform-state-read-role-tf-module/workflows/build/badge.svg)](https://github.com/cisagov/terraform-state-read-role-tf-module/actions)
+[![License](https://img.shields.io/github/license/cisagov/terraform-state-read-role-tf-module)](https://spdx.org/licenses/)
+[![CodeQL](https://github.com/cisagov/terraform-state-read-role-tf-module/workflows/CodeQL/badge.svg)](https://github.com/cisagov/terraform-state-read-role-tf-module/actions/workflows/codeql-analysis.yml)
 
 This is a Terraform module for creating an IAM role and policy that
 can access Terraform state objects from a specified S3 bucket.  It
