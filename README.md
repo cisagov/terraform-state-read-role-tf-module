@@ -34,28 +34,28 @@ module "example" {
 ## Requirements ##
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | terraform | >= 1.1 |
 | aws | >= 4.9 |
 
 ## Providers ##
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | aws | >= 4.9 |
 | aws.users | >= 4.9 |
 
 ## Modules ##
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | read\_terraform\_state | github.com/cisagov/s3-read-role-tf-module | n/a |
 | read\_terraform\_state\_additional\_states | github.com/cisagov/s3-read-role-tf-module | n/a |
 
 ## Resources ##
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_iam_policy.access_terraform_lock_db_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_policy.assume_read_terraform_state_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_role_policy_attachment.access_terraform_lock_db_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
@@ -66,7 +66,7 @@ module "example" {
 ## Inputs ##
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | account\_ids | AWS account IDs that are allowed to assume the role that allows access to the specified Terraform state. | `list(string)` | `[]` | no |
 | additional\_read\_only\_states | A map.  The keys are the state paths and the values are objects where only the key "workspace" is supported, and this key is required.  Together the key and value define an additional workspace-specific state to which the user should be granted read-only access.  E.g., {cool-accounts/dynamic.tfstate = {workspace = env6-staging}}. | `map(object({ workspace = string }))` | `{}` | no |
 | additional\_read\_only\_states\_role\_description | The description to associate with the IAM role (as well as the corresponding policy) that allows read-only access to any additional states in the specified S3 bucket where Terraform state is stored.  The "%s" will get replaced with the terraform\_state\_bucket\_name variable.  Note that these additional states (if any) are defined in additional\_read\_only\_states; hence, this variable is not used if additional\_read\_only\_states is an empty map. | `string` | `"Allows read-only access to additional Terraform states in the %s S3 bucket."` | no |
@@ -90,7 +90,7 @@ module "example" {
 ## Outputs ##
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | assume\_policy | An array that is either empty (if no assume role policy was created) or contains a single element that is the policy allowing assumption of the role that can access the specified Terraform state. |
 | policy | The policy that can access the specified Terraform state. |
 | read\_only | A Boolean value indicating whether or not the role and policy are read-only.  If false then the role and policy will allow write permissions. |
