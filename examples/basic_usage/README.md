@@ -73,11 +73,7 @@ Notes:
 
 ## Resources ##
 
-| ---- | ---- |
 No resources.
-| Name | Type |
-| [aws_subnet.example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet) | resource |
-| [aws_vpc.example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc) | resource |
 
 ## Inputs ##
 
