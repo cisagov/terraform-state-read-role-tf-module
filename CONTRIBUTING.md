@@ -25,12 +25,12 @@ one.
 ## Pull requests ##
 
 If you choose to [submit a pull
-request](https://github.com/cisagov/terraform-state-read-role-tf-module/pulls), you
-will notice that our continuous integration (CI) system runs a fairly
-extensive set of linters and syntax checkers.  Your pull request may
-fail these checks, and that's OK.  If you want you can stop there and
-wait for us to make the necessary corrections to ensure your code
-passes the CI checks.
+request](https://github.com/cisagov/terraform-state-read-role-tf-module/pulls),
+you will notice that our continuous integration (CI) system runs a
+fairly extensive set of linters and syntax checkers.  Your pull
+request may fail these checks, and that's OK.  If you want you can
+stop there and wait for us to make the necessary corrections to ensure
+your code passes the CI checks.
 
 If you want to make the changes yourself, or if you want to become a
 regular contributor, then you will want to set up

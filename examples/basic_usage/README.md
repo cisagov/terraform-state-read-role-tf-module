@@ -55,20 +55,20 @@ Notes:
 ## Requirements ##
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | terraform | ~> 1.1 |
 | aws | ~> 6.7 |
 
 ## Providers ##
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | aws | ~> 6.7 |
 
 ## Modules ##
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | example | ../../ | n/a |
 
 ## Resources ##
@@ -78,14 +78,14 @@ No resources.
 ## Inputs ##
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | account\_ids | AWS account IDs that are allowed to assume the role that allows read-only access to the Terraform state for this example. | `list(string)` | n/a | yes |
 | terraform\_state\_bucket | The name of the S3 bucket where Terraform state is stored. | `string` | n/a | yes |
 
 ## Outputs ##
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | assume\_policy | The policy allowing assumption of the role that can read the Terraform state for this example. |
 | policy | The policy that can read the Terraform state for this example. |
 | role | The role that can read the Terraform state for this example. |
